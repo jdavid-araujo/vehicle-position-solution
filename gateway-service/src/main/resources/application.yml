@@ -1,0 +1,22 @@
+spring:
+  application:
+    name: gateway-service
+  cloud:
+    gateway:
+      routes:
+        - id: poi-route
+          uri: ${POI_SERVICE_URL:http://localhost:8082}/v1/pois
+          predicates:
+            - Path=/v1/pois/**
+        - id: vehicle-route
+          uri: ${VEHICLE_SERVICE_URL:http://localhost:8081}/v1/veiculos
+          predicates:
+            - Path=/v1/veiculos/**
+        - id: vehicle-route
+          uri: ${VEHICLE_SERVICE_URL:http://localhost:8081}/v1/posicoes
+          predicates:
+            - Path=/v1/posicoes/**
+        - id: vehicle-position-search-route
+          uri: ${VEHICLE_POSTION_SEARCH_SERVICE_URL:http://localhost:8080}/v1/veiculos-poi
+          predicates:
+            - Path=/v1/veiculos-poi/**
